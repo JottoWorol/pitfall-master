@@ -43,6 +43,8 @@ namespace Core.Joystick
         {
             Value = (eventData.position - _initialPoint) / _joystickConfig.RadiusPixels;
             Value = Vector2.ClampMagnitude(Value, 1f);
+            _joystickView.SetMovePosition(Value);
+            
             if (!_isMoving && Value.magnitude >= _joystickConfig.MoveThreshold)
             {
                 StartMove();
@@ -52,7 +54,6 @@ namespace Core.Joystick
             {
                 StopMove();
             }
-
         }
 
         private void OnPointerUp(PointerEventData eventData)
